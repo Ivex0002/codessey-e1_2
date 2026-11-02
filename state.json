@@ -1,0 +1,45 @@
+{
+    "quizzes": [
+        {
+            "question": "Python의 창시자는?",
+            "choices": [
+                "Guido",
+                "Linus",
+                "Bjarne",
+                "James"
+            ],
+            "answer": 1
+        },
+        {
+            "question": "바위너구리와 유전학적으로 가장 가까운 동물은?",
+            "choices": [
+                "코끼리",
+                "너구리",
+                "오소리",
+                "개"
+            ],
+            "answer": 1
+        },
+        {
+            "question": "소의 위장은 몇개인가?",
+            "choices": [
+                "1",
+                "2",
+                "3",
+                "4"
+            ],
+            "answer": 4
+        },
+        {
+            "question": "흰개미는 분류상 어떤 생물인가?",
+            "choices": [
+                "개미목",
+                "벌목",
+                "바퀴목",
+                "집게벌레목"
+            ],
+            "answer": 3
+        }
+    ],
+    "best_score": 4
+}
