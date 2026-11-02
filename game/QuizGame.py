@@ -3,6 +3,9 @@ import os
 from .Quiz import Quiz
 from .quizzes import quizzes
 from .run_quiz_session import run_quiz_session
+from .add_quiz import add_quiz
+from .check_quizzes import check_quizzes
+from util.choice import choice
 
 
 class QuizGame:
@@ -49,10 +52,13 @@ class QuizGame:
     # todo : 퀴즈 출제/등록/목록/점수 확인v/종료 화면v
     # todo : 퀴즈 풀기v, 퀴즈 추가, 퀴즈 목록, 점수 확인v 기능이 동작한다.
 
-    def add_quiz():
+    def add_quiz(self):
+        add_quiz(self.quizzes)
+        self.save_data()
         return
 
-    def check_quizzes():
+    def check_quizzes(self):
+        check_quizzes(self.quizzes)
         return
 
     def run(self):
@@ -60,19 +66,28 @@ class QuizGame:
             print("\n" + "=" * 30)
             print("   🎯 퀴즈 게임 메뉴")
             print("=" * 30)
-            print("1. 퀴즈 시작")
-            print("2. 최고 점수 확인")
-            print("3. 종료")
 
-            choice = input("선택: ").strip()
+            menu = [
+                "퀴즈 시작",
+                "최고 점수 확인",
+                "퀴즈 추가",
+                "현재 퀴즈 목록 보기",
+                "종료",
+            ]
 
-            if choice == "1":
+            user_input = choice(menu)
+
+            if user_input == "1":
                 self.start_quiz()
-            elif choice == "2":
+            elif user_input == "2":
                 print(f"\n현재 최고 점수: {self.best_score}점")
-            elif choice == "3":
+            elif user_input == "3":
+                self.add_quiz()
+            elif user_input == "4":
+                self.check_quizzes()
+            elif user_input == "5":
                 print("게임을 종료합니다.")
                 self.save_data()
                 break
             else:
-                print("⚠️ 잘못된 입력입니다. 1~3 사이의 숫자를 입력하세요.")
+                print(f"잘못된 입력입니다. 1~{len(menu)} 사이의 숫자를 입력하세요.")

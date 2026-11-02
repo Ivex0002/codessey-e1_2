@@ -39,6 +39,15 @@
                 "집게벌레목"
             ],
             "answer": 3
+        },
+        {
+            "question": "1234",
+            "choices": [
+                "사과",
+                "배",
+                "포도"
+            ],
+            "answer": 2
         }
     ],
     "best_score": 4
