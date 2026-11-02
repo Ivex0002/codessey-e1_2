@@ -48,6 +48,23 @@
                 "포도"
             ],
             "answer": 2
+        },
+        {
+            "question": "가장 맛있는 음식은?",
+            "choices": [
+                "짜장면",
+                "짬뽕",
+                "탕수육"
+            ],
+            "answer": 1
+        },
+        {
+            "question": "test",
+            "choices": [
+                "test1",
+                "test2"
+            ],
+            "answer": 2
         }
     ],
     "best_score": 4

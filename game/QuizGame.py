@@ -49,8 +49,12 @@ class QuizGame:
             self.best_score = score
             self.save_data()
 
-    # todo : 퀴즈 출제/등록/목록/점수 확인v/종료 화면v
-    # todo : 퀴즈 풀기v, 퀴즈 추가, 퀴즈 목록, 점수 확인v 기능이 동작한다.
+    # todo : 퀴즈 출제v/등록v/목록/점수 확인v/종료 화면v
+    # todo : 퀴즈 풀기v, 퀴즈 추가v, 퀴즈 목록v, 점수 확인v 기능이 동작한다.
+    # todo : 퀴즈 확인할때 양식 맞추기
+    # n번 : 문제 내용~~~~
+    # 답안 : a번 - a, b번 - b...
+    # 정답 : c번
 
     def add_quiz(self):
         add_quiz(self.quizzes)

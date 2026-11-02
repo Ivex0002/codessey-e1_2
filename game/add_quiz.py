@@ -17,6 +17,11 @@ def add_quiz(quizzes: List[Quiz]):
             new_quiz = user_input_quiz()
             quizzes.append(new_quiz)
             print("\n--- 새로운 퀴즈가 등록 되었습니다 ---")
+
+            last_idx = len(quizzes) - 1
+            added_quiz = quizzes[last_idx]
+
+            print(f"{last_idx+1}번 : {added_quiz}")
             return
         elif user_input == "2":
             check_quizzes(quizzes)
@@ -37,7 +42,7 @@ def user_input_quiz():
 
     new_quiz_data = {}
 
-    for name, param in params.items():
+    for name, _ in params.items():
         if name == "self":
             continue
 
@@ -53,9 +58,21 @@ def user_input_quiz():
         if name == "choices":
             value = [opt.strip() for opt in value.split(",") if opt.strip()]
         elif name == "answer":
-            while not value.isdigit():
-                value = input("숫자로만 입력해주세요: ").strip()
-            value = int(value)
+            while True:
+                if not value.isdigit():
+                    value = input("❌ 숫자로만 입력해주세요: ").strip()
+                    continue
+
+                int_value = int(value)
+
+                if 1 <= int_value <= len(new_quiz_data["choices"]):
+                    value = int_value
+                    break
+                else:
+                    print(
+                        f"정답은 1 ~ {len(new_quiz_data['choices'])} 사이의 숫자로 입력해주세요."
+                    )
+                    value = input("▶ 다시 입력해주세요: ").strip()
 
         new_quiz_data[name] = value
     print("-" * 30)
