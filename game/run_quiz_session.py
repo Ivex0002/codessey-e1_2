@@ -4,7 +4,13 @@ import random
 def run_quiz_session(quizzes):
     print("\n1. 순서대로 풀기")
     print("2. 랜덤 순서 풀기")
+    print("3. 문제 수 선택")
     choice = input("선택: ").strip()
+
+    if choice == "3":
+        print(f"총 문제 개수 : {len(quizzes_to_play)}")
+        print("몇 문제를 풀지 선택하세요")
+        how_many_quizzes = input("선택: ").strip()
 
     quizzes_to_play = quizzes[:]
     if choice == "2":
