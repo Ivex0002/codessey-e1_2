@@ -1,16 +1,6 @@
 {
     "quizzes": [
         {
-            "question": "Python의 창시자는?",
-            "choices": [
-                "Guido",
-                "Linus",
-                "Bjarne",
-                "James"
-            ],
-            "answer": 1
-        },
-        {
             "question": "바위너구리와 유전학적으로 가장 가까운 동물은?",
             "choices": [
                 "코끼리",
@@ -41,31 +31,45 @@
             "answer": 3
         },
         {
-            "question": "1234",
+            "question": "이 중에서 가장 비타민 c 가 많은 과일은?",
             "choices": [
                 "사과",
+                "귤",
                 "배",
                 "포도"
             ],
             "answer": 2
         },
         {
-            "question": "가장 맛있는 음식은?",
+            "question": "문어의 심장은 몇 개인가?",
             "choices": [
-                "짜장면",
-                "짬뽕",
-                "탕수육"
+                "1개",
+                "2개",
+                "3개",
+                "4개"
+            ],
+            "answer": 3
+        },
+        {
+            "question": "판다의 주식은 무엇인가?",
+            "choices": [
+                "대나무",
+                "물고기",
+                "과일",
+                "곤충"
             ],
             "answer": 1
         },
         {
-            "question": "test",
+            "question": "꿀벌은 집을 몇각형으로 짓는가?",
             "choices": [
-                "test1",
-                "test2"
+                "3",
+                "4",
+                "5",
+                "6"
             ],
-            "answer": 2
+            "answer": 4
         }
     ],
-    "best_score": 4
+    "best_score": 7
 }
