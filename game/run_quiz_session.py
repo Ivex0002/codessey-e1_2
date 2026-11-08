@@ -1,6 +1,6 @@
 import random
 from util.choice import choice
-from util.check_user_input import check_int_user_input
+from util.check_int_user_input import check_int_user_input
 
 
 def run_quiz_session(quizzes):
