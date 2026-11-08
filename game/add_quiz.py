@@ -1,6 +1,6 @@
 import inspect
 from typing import List
-from .Quiz import Quiz
+from data_classes.Quiz import Quiz
 from .check_quizzes import check_quizzes
 from util.choice import choice
 

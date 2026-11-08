@@ -1,5 +1,5 @@
 from typing import List
-from .Quiz import Quiz
+from data_classes.Quiz import Quiz
 
 quizzes: List[Quiz] = [
     Quiz(

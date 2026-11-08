@@ -1,14 +1,17 @@
 import random
 from typing import List
-from game.Quiz import Quiz
+from datetime import datetime
+from data_classes.Quiz import Quiz
 from util.choice import choice
 from util.check_int_user_input import check_int_user_input
+from data_classes.QuizSessionData import QuizSessionData
 
 
 def run_quiz_session(quizzes: List[Quiz]):
     max_quizzes: int = len(quizzes)
     how_many_quizzes: int = max_quizzes
     run_quiz_menu = ["순서대로 풀기", "랜덤 순서 풀기", "문제 수 선택"]
+    start_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
     while True:
         print("\n=====퀴즈 풀기 메뉴입니다=====")
@@ -59,7 +62,11 @@ def run_quiz_session(quizzes: List[Quiz]):
                     break
 
         print(f"\n퀴즈 종료! 당신의 점수: {score}/{len(quizzes_to_play)}")
-        return score
+        end_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        current_quiz_session_data = QuizSessionData(
+            start_time, end_time, how_many_quizzes, score
+        )
+        return current_quiz_session_data
 
 
 def show_current_number_of_quizzes(max, current):

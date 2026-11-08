@@ -1,7 +1,7 @@
 import json
 import os
 from typing import List
-from .Quiz import Quiz
+from data_classes.Quiz import Quiz
 from .quizzes import quizzes
 from .run_quiz_session import run_quiz_session
 from .add_quiz import add_quiz
@@ -9,13 +9,16 @@ from .check_quizzes import check_quizzes
 from util.choice import choice
 from util.check_a_quiz import check_a_quiz
 from util.check_int_user_input import check_int_user_input
+from data_classes.QuizSessionData import QuizSessionData
 
 
 class QuizGame:
     def __init__(self):
         self.quizzes: List[Quiz] = []
         self.best_score: float = 0.0
+        self.history: List[QuizSessionData] = []
         self.file_path = "state.json"
+
         self.load_data()
 
     def load_data(self):
@@ -28,14 +31,18 @@ class QuizGame:
                 data = json.load(f)
                 self.best_score = data.get("best_score", 0)
                 self.quizzes = [Quiz(**q) for q in data.get("quizzes", [])]
+                self.history = [QuizSessionData(**s) for s in data.get("history", [])]
         except (json.JSONDecodeError, IOError):
             print("⚠️ 데이터 파일이 손상되었습니다. 기본 데이터로 시작합니다.")
             self.set_default_quizzes()
 
-    def save_data(self):
+    def save_data(self, quiz_session_data: QuizSessionData = None):
+        if quiz_session_data:
+            self.history.append(quiz_session_data)
         data = {
             "quizzes": [q.to_dict() for q in self.quizzes],
             "best_score": self.best_score,
+            "history": [session.to_dict() for session in self.history],
         }
         with open(self.file_path, "w", encoding="utf-8") as f:
             json.dump(data, f, ensure_ascii=False, indent=4)
@@ -45,12 +52,13 @@ class QuizGame:
         self.save_data()
 
     def start_quiz(self):
-        score = run_quiz_session(self.quizzes)
+        quiz_session_data = run_quiz_session(self.quizzes)
 
-        if score > self.best_score:
+        if quiz_session_data.score > self.best_score:
             print("최고 점수 경신!")
-            self.best_score = score
-            self.save_data()
+            self.best_score = quiz_session_data.score
+
+        self.save_data(quiz_session_data)
 
     def add_quiz(self):
         add_quiz(self.quizzes)

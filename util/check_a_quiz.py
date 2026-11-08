@@ -1,4 +1,4 @@
-from game.Quiz import Quiz
+from data_classes.Quiz import Quiz
 
 
 def check_a_quiz(quiz: Quiz):

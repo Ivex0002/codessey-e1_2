@@ -45,5 +45,19 @@
             "hint": "자연에서 볼 수 있는 가장 안정적인 구조의 도형입니다"
         }
     ],
-    "best_score": 5.5
+    "best_score": 5.5,
+    "history": [
+        {
+            "start_time": "2026-11-08 17:48:46",
+            "end_time": "2026-11-08 17:48:58",
+            "how_many_quizzes": 4,
+            "score": 4
+        },
+        {
+            "start_time": "2026-11-08 17:50:04",
+            "end_time": "2026-11-08 17:50:10",
+            "how_many_quizzes": 1,
+            "score": 1
+        }
+    ]
 }
