@@ -5,6 +5,6 @@ from util.check_a_quiz import check_a_quiz
 
 def check_quizzes(quizzes: List[Quiz]):
     for idx, item in enumerate(quizzes, 1):
-        print(f"{idx}번 문제 : ", end="")
+        print(f"\n{idx}번 문제 : ", end="")
         check_a_quiz(item)
     return
