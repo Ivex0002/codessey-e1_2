@@ -60,9 +60,9 @@ class QuizGame:
 
     def run(self):
         while True:
-            print("\n" + "=" * 30)
+            print("\n" + "=" * 23)
             print("   🎯 퀴즈 게임 메뉴")
-            print("=" * 30)
+            print("=" * 23)
 
             menu = [
                 "퀴즈 시작",
@@ -73,18 +73,20 @@ class QuizGame:
             ]
 
             user_input = choice(menu)
+            # print(f"user_input : {user_input}, {type(user_input)}")
 
-            if user_input == "1":
-                self.start_quiz()
-            elif user_input == "2":
-                print(f"\n현재 최고 점수: {self.best_score}점")
-            elif user_input == "3":
-                self.add_quiz()
-            elif user_input == "4":
-                self.check_quizzes()
-            elif user_input == "5":
-                print("게임을 종료합니다.")
-                self.save_data()
-                break
-            else:
-                print(f"잘못된 입력입니다. 1~{len(menu)} 사이의 숫자를 입력하세요.")
+            match user_input:
+                case 1:
+                    self.start_quiz()
+                case 2:
+                    print(f"\n현재 최고 점수: {self.best_score}점")
+                case 3:
+                    self.add_quiz()
+                case 4:
+                    self.check_quizzes()
+                case 5:
+                    print("게임을 종료합니다.")
+                    self.save_data()
+                    break
+                case _:
+                    print(f"잘못된 입력입니다. 1~{len(menu)} 사이의 숫자를 입력하세요.")
