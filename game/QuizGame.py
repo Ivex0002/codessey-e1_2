@@ -7,6 +7,8 @@ from .run_quiz_session import run_quiz_session
 from .add_quiz import add_quiz
 from .check_quizzes import check_quizzes
 from util.choice import choice
+from util.check_a_quiz import check_a_quiz
+from util.check_int_user_input import check_int_user_input
 
 
 class QuizGame:
@@ -59,6 +61,28 @@ class QuizGame:
         check_quizzes(self.quizzes)
         return
 
+    def del_quiz(self):
+        print("\n삭제할 문제의 번호를 선택해주세요(취소 : 0)")
+        del_user_input = check_int_user_input(len(self.quizzes), 0)
+        if del_user_input == 0:
+            print("취소되었습니다")
+            return
+
+        del_idx = del_user_input - 1
+
+        print("\n!경고!")
+        print("삭제할 문제가 맞는지 다시 한번 확인해주세요")
+        print(f"\n{del_user_input}번 문제 : ", end="")
+        check_a_quiz(self.quizzes[del_idx])
+        del_tf = input("\n삭제하시겠습니까? y/n\n입력 :").strip().lower() == "y"
+        if del_tf:
+            del self.quizzes[del_idx]
+            self.save_data()
+            print("삭제되었습니다.")
+
+        else:
+            print("취소되었습니다")
+
     def run(self):
         while True:
             print("\n" + "=" * 23)
@@ -70,6 +94,7 @@ class QuizGame:
                 "최고 점수 확인",
                 "퀴즈 추가",
                 "현재 퀴즈 목록 보기",
+                "퀴즈 삭제하기",
                 "종료",
             ]
 
@@ -86,6 +111,10 @@ class QuizGame:
                 case 4:
                     self.check_quizzes()
                 case 5:
+                    print("\n!!!퀴즈 삭제 메뉴입니다!!!\n")
+                    self.check_quizzes()
+                    self.del_quiz()
+                case 6:
                     print("게임을 종료합니다.")
                     self.save_data()
                     break
