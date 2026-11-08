@@ -1,5 +1,6 @@
 import json
 import os
+from typing import List
 from .Quiz import Quiz
 from .quizzes import quizzes
 from .run_quiz_session import run_quiz_session
@@ -10,8 +11,8 @@ from util.choice import choice
 
 class QuizGame:
     def __init__(self):
-        self.quizzes = []
-        self.best_score = 0
+        self.quizzes: List[Quiz] = []
+        self.best_score: float = 0.0
         self.file_path = "state.json"
         self.load_data()
 

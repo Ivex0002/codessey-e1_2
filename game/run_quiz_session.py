@@ -1,9 +1,11 @@
 import random
+from typing import List
+from game.Quiz import Quiz
 from util.choice import choice
 from util.check_int_user_input import check_int_user_input
 
 
-def run_quiz_session(quizzes):
+def run_quiz_session(quizzes: List[Quiz]):
     max_quizzes: int = len(quizzes)
     how_many_quizzes: int = max_quizzes
     run_quiz_menu = ["순서대로 풀기", "랜덤 순서 풀기", "문제 수 선택"]
@@ -37,15 +39,24 @@ def run_quiz_session(quizzes):
             for idx, choice_text in enumerate(q.choices, 1):
                 print(f"{idx}) {choice_text}")
 
-            try:
-                user_ans = int(input("정답 번호 입력: "))
+            while True:
+                print("정답을 입력하세요")
+                print("- 힌트 보기(0.5점이 차감됩니다.) : '0' 입력")
+                # check_int_user_input 재활용
+                # int만 입력 가능한 해당 함수의 규칙에 맞게 하기위해 0 이라는 새로운 선택지를 규칙으로 설정함
+                user_ans = check_int_user_input(len(q.choices), 0)
+                if user_ans == 0:
+                    print(f"\n힌트 : {q.hint}")
+                    score -= 0.5
+                    print(f"0.5점이 차감되었습니다.\n현재점수:{score}\n")
+                    continue
                 if user_ans == q.answer:
                     print("정답입니다!")
                     score += 1
+                    break
                 else:
                     print(f"틀렸습니다. 정답은 {q.answer}번입니다.")
-            except ValueError:
-                print("숫자만 입력해주세요! 이번 문제는 틀린 것으로 처리됩니다.")
+                    break
 
         print(f"\n퀴즈 종료! 당신의 점수: {score}/{len(quizzes_to_play)}")
         return score
