@@ -118,6 +118,7 @@ user_input : 1, <class 'int'>
 ## 문제 상황
 
 [점수 기록 히스토리 로직 구현](https://github.com/Ivex0002/codessey-python/commit/92b72fafdfe55559b7a044f63efabed9bd8f437d) 작성 중, 데이터 정의 클래스와 동작 로직이 혼합되어 분리 필요성을 느끼고 최상위 폴더에 `data_classes` 디렉토리 생성 및 `Quiz`, `QuizSessionData` 를 구현함
+
 이 과정에서 먼저 구현되어 있던 `Quiz` 데이터 클래스 파일을 `game` 디렉토리에서 `data_classes` 디렉토리로 이동함
 
 그러나 단순 파일 이동으론 vscode 상에서 완벽하게 경로 처리를 해주지 못해 다음과 같은 문제가 발생함
