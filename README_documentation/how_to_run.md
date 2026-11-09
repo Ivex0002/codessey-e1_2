@@ -1,4 +1,5 @@
 # 실행 방법
+
 ### 1. 루트 리렉토리로 이동
 ```
 PS C:\Users\User\Documents> cd e1_2
