@@ -66,7 +66,13 @@ user_input : 1, <class 'int'>
 
 int로 출력됨을 확인
 
-=> `game\QuizGame.py` 에서 분기 처리를 `if user_input == "1":` 와 같이 비교중이었음. 즉 숫자 대신 문자열 처리를 하고 있었던 것. 기본적으론 `input` 결과값이 문자열이고, 이를 `check_int_user_input` 함수에선 비교를 위해 `int` 로 전환하여 리턴해주던 것이 문제 원인이었음. 따라서 분기점마다 문자열을 숫자로 변경하면 해결 될 것이라 판단함
+=> `game\QuizGame.py` 에서 분기 처리를 `if user_input == "1":` 와 같이 비교중이었음
+
+즉 숫자 대신 문자열 처리를 하고 있었던 것
+
+기본적으론 `input` 결과값이 문자열이고, 이를 `check_int_user_input` 함수에선 비교를 위해 `int` 로 전환하여 리턴해주던 것이 문제 원인이었음
+
+따라서 분기점마다 문자열을 숫자로 변경하면 해결 될 것이라 판단함
 
 ```
 match user_input:
