@@ -165,4 +165,4 @@ ImportError: attempted relative import beyond top-level package
 ```py
 from data_classes.Quiz import Quiz # 절대 경로로 수정
 ```
-`..data_classes.Quiz import Quiz`` 를 검색 후 모두 `data_classes.Quiz import Quiz` 으로 절대경로로 일괄 변경하여 문제를 해결함
+`..data_classes.Quiz import Quiz` 를 검색 후 모두 `data_classes.Quiz import Quiz` 으로 절대경로로 일괄 변경하여 문제를 해결함
