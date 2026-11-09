@@ -131,4 +131,4 @@ score: float           # 점수
 
 기록 확인 과정에서 `start_time`과 `end_time`을 대조하여 풀이 시간을 계산 할 수 있습니다
 
-이전 `기능목록`의 [5. 퀴즈 삭제하기](https://github.com/Ivex0002/codessey-e1_2/blob/main/README_documentation/feature_list.md#5-%ED%80%B4%EC%A6%88-%EC%82%AD%EC%A0%9C%ED%95%98%EA%B8%B0)와 같이 문제들을 푼 시간은 `start_time`과 `end_time`에 의존적인 파생 데이터 이기 때문에 따로 키를 나누어 저장하지 않았습니다
+이전 `기능목록`의 [5. 퀴즈 삭제하기](https://github.com/Ivex0002/codessey-e1_2/blob/main/README_documentation/feature_list.md#5-%ED%80%B4%EC%A6%88-%EC%82%AD%EC%A0%9C%ED%95%98%EA%B8%B0)에서 언급한 `인덱스 기반 문제 번호`와 같이 문제들을 푼 시간은 `start_time`과 `end_time`에 의존적인 파생 데이터 이기 때문에 따로 키를 나누어 저장하지 않았습니다
