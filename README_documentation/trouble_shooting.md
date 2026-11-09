@@ -127,7 +127,7 @@ user_input : 1, <class 'int'>
 
 이 과정에서 먼저 구현되어 있던 `Quiz` 데이터 클래스 파일을 `game` 디렉토리에서 `data_classes` 디렉토리로 이동함
 
-그러나 단순 파일 이동으론 vscode 상에서 완벽하게 경로 처리를 해주지 못해 다음과 같은 문제가 발생함
+그러나 단순 파일 이동으론 vscode 상에서 완벽하게 경로 처리를 해주지 못해 아래과 같은 문제가 발생함
 
 ```py
 # 이전 임포팅
@@ -136,8 +136,6 @@ user_input : 1, <class 'int'>
 # vscode로 자동 전환된 임포팅
 from ..data_classes.Quiz import Quiz
 ```
-
-- 실행 결과 다음과 같은 충돌이 발생함
 
 ```bash
 $ python main.py
