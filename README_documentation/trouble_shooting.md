@@ -37,12 +37,11 @@ $ python main.py
 
 - 해결방법
 
+`game/QuizGame.py` 파일이 해당 로그 출력되는 진입점이므로 먼저 `user_input`의 타입을 조사함
 ```
 user_input = choice(menu)
 print(f"user_input : {user_input}, {type(user_input)}") #
 ```
-
-해당 코드로 `user_input`의 실제 값과 타입을 조사함
 
 ```
 /e/codyssey/e1_2 (main)
