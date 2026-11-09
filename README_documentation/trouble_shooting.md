@@ -148,7 +148,7 @@ ImportError: attempted relative import beyond top-level package
 - `main.py`에서 `QuizGame`을 `"__main__"` 으로 실행중이고, 이는 `from game.QuizGame import QuizGame` 를 최상위 패키지로 설정함을 의미함
 - 그러나 최상위 패키지 위쪽의, `game` 디렉토리 위의 폴더에 접근하고자 하면 루트보다 위쪽에 해당하므로 접근이 정상적으로 되지 않았던 것이었음
 
-=> 따라서, 이를 해결하려면 3가지 정도의 해결책이 가능함
+=> 따라서, 이를 해결하려면 4가지 정도의 해결책이 가능함
 
 1. 모든 소스코드를 `src` 디렉토리에 삽입, `src`를 루트 패키지로 지정함으로써 내부에 `game`과 `data_classes`, `util` 등을 가짐
    - 이는 추후에 배포를 위한 설정 파일을 추가할때 코어 로직과 설정 파일을 분리함으로써 유용한 방법으로 판단됨
