@@ -17,7 +17,7 @@
 ├── main.py
 └── state.json
 ```
-vscode의 확장 프로그램인 [file-combine](https://marketplace.visualstudio.com/items?itemName=therobertsmith.file-combine) 를 활용 했습니다
+vscode의 확장 프로그램인 [file-combine](https://marketplace.visualstudio.com/items?itemName=therobertsmith.file-combine) 을 활용 했습니다
 
 기반이 되는 데이터 클래스인 `Quiz.py`, `QuizSessionData.py` 는 추후에 재활용될 가능성을 염두하고 따로 분리했습니다(ex: 프론트 웹페이지 구성)
 
