@@ -149,7 +149,7 @@ Traceback (most recent call last):
 ImportError: attempted relative import beyond top-level package
 ```
 
-위와 같은 실행 오류가 발생한 이유는 아래와 같음
+위와 같은 실행 오류가 발생한 이유는 다음와 같음
 
 - `main.py`에서 `QuizGame`을 `"__main__"` 으로 실행중이고, 이는 `from game.QuizGame import QuizGame` 를 최상위 패키지로 설정함을 의미함
 - 그러나 최상위 패키지 위쪽의, `game` 디렉토리 위의 폴더에 접근하고자 하면 루트보다 위쪽에 해당하므로 접근이 정상적으로 되지 않았던 것이었음
