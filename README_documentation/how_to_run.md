@@ -5,7 +5,9 @@
 PS C:\Users\User\Documents> cd e1_2
 PS C:\Users\User\Documents\e1_2>
 ```
+
 ### 2. 메인 파일 실행
+
 - 실행 명령어
 ```
 python main.py
