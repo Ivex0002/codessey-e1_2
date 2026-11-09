@@ -2,12 +2,12 @@
 
 ### README 제출 체크리스트
 
-- 프로젝트 개요
-- 퀴즈 주제 선정 이유
-- 실행 방법 (예: python main.py)
-- 기능 목록(퀴즈 풀기/추가/목록/점수)
-- 파일 구조
-- 데이터 파일 설명(state.json 경로/역할/필드 구조)
+- [프로젝트 개요](README_documentation/project_overview.md)
+- [퀴즈 주제 선정 이유](README_documentation/reasons_for_topic.md)
+- [실행 방법](README_documentation/how_to_run.md)
+- [기능 목록](README_documentation/feature_list.md)
+- [파일 구조](README_documentation/file_structure.md)
+- [데이터 파일 설명](README_documentation/data_file_specification.md)
 
 ## 트러블 슈팅
 
