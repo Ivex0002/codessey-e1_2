@@ -9,7 +9,9 @@
 - 파일 구조
 - 데이터 파일 설명(state.json 경로/역할/필드 구조)
 
-### 트러블 슈팅
+## 트러블 슈팅
+
+### 숫자/문자열 타입 불일치 문제
 
 ```
 /e/codyssey/e1_2 (main)
@@ -120,3 +122,49 @@ user_input : 1, <class 'int'>
 ```
 
 - 변경 후 정상적으로 동작함을 확인
+
+### 최상위 폴더 임포팅 문제
+
+[점수 기록 히스토리 로직 구현](https://github.com/Ivex0002/codessey-python/commit/92b72fafdfe55559b7a044f63efabed9bd8f437d) 작성 중, 데이터 정의 클래스와 로직 클래스가 혼합되어 분리 필요성을 느끼고 최상위 폴더에 data_classes 디렉토리 생성 및 `Quiz`, `QuizSessionData` 를 구현함
+이 과정에서 먼저 구현되어 있던 `Quiz` 데이터 클래스 파일을 `game` 디렉토리에서 `data_classes` 디렉토리로 이동함
+그러나 단순 파일 이동으론 vscode 상에서 완벽하게 경로 처리를 해주지 못해 다음과 같은 문제가 발생함
+
+```py
+# 이전 임포팅
+# from .Quiz import Quiz
+
+# vscode로 자동 전환된 임포팅
+from ..data_classes.Quiz import Quiz
+```
+
+```bash
+$ python main.py
+Traceback (most recent call last):
+  File "E:\codyssey\e1_2\main.py", line 1, in <module>
+    from game.QuizGame import QuizGame
+  File "E:\codyssey\e1_2\game\QuizGame.py", line 9, in <module>
+    from ..data_classes.Quiz import Quiz
+ImportError: attempted relative import beyond top-level package
+```
+
+위와 같은 실행 오류가 발생한 이유는 아래와 같음
+
+- `main.py`에서 `QuizGame`을 `"__main__"` 으로 실행중이고, 이는 `from game.QuizGame import QuizGame` 를 최상위 패키지로 설정함을 의미함
+- 그러나 최상위 패키지 위쪽의, `game` 디렉토리 위의 폴더에 접근하고자 하면 루트보다 위쪽에 해당하므로 접근이 정상적으로 되지 않았던 것이었음
+
+=> 따라서, 이를 해결하려면 3가지 정도의 해결책이 가능함
+
+1. 모든 소스코드를 `src` 디렉토리에 삽입, `src`를 루트 패키지로 지정함으로써 내부에 `game`과 `data_classes`, `util` 등을 가짐
+   - 이는 추후에 배포를 위한 설정 파일을 추가할때 코어 로직과 설정 파일을 분리함으로써 유용한 방법으로 판단됨
+2. 임포팅 경로를 절대 경로로 수정
+   - 현재 폴더 구조에서 가장 간편하고 빠르고 쉬운 해결책임
+3. 데이터 클래스를 `game` 디렉토리 내부로 이동
+   - 현재 루트 패키지가 `game` 이기 때문에 해결은 되나, 파일의 목적성이 분리가 되지 않아 보기 좋지 않고 추후에 `game` 외부 패키지를 운용할경우 또다시 수정이 필요한 방법임
+
+현재 프로젝트에선 크기가 크지 않고, 웹이나 프록시 서버 등 확장성을 염두하지 않았기 때문에 가장 빠르고 간단한 해결책인 2번 방법을 채택함
+
+- 수정 예시
+
+```py
+from data_classes.Quiz import Quiz # 절대 경로로 수정
+```
