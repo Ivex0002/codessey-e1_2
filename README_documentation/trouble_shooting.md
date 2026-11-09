@@ -1,6 +1,8 @@
 # 트러블 슈팅
 
-### 숫자/문자열 타입 불일치 문제
+# 1. 숫자/문자열 타입 불일치
+
+## 문제 상황
 
 ```
 /e/codyssey/e1_2 (main)
@@ -35,7 +37,7 @@ $ python main.py
 
 유틸 함수인 `check_int_user_input`, `choice` 통합 이후 첫 진입점인 `QuizGame` 에서 자연수를 입력했음에도 제대로 분기 처리가 되지 않는 문제가 발생함
 
-- 해결방법
+## 해결방법
 
 `game/QuizGame.py` 파일이 해당 로그 출력되는 진입점이므로 먼저 `user_input`의 타입을 조사함
 ```
@@ -111,9 +113,11 @@ user_input : 1, <class 'int'>
 
 - 변경 후 정상적으로 동작함을 확인
 
-### 최상위 폴더 임포팅 문제
+# 2. 최상위 폴더 임포팅 실행 버그
 
-[점수 기록 히스토리 로직 구현](https://github.com/Ivex0002/codessey-python/commit/92b72fafdfe55559b7a044f63efabed9bd8f437d) 작성 중, 데이터 정의 클래스와 로직 클래스가 혼합되어 분리 필요성을 느끼고 최상위 폴더에 data_classes 디렉토리 생성 및 `Quiz`, `QuizSessionData` 를 구현함
+## 문제 상황
+
+[점수 기록 히스토리 로직 구현](https://github.com/Ivex0002/codessey-python/commit/92b72fafdfe55559b7a044f63efabed9bd8f437d) 작성 중, 데이터 정의 클래스와 동작 로직이 혼합되어 분리 필요성을 느끼고 최상위 폴더에 data_classes 디렉토리 생성 및 `Quiz`, `QuizSessionData` 를 구현함
 이 과정에서 먼저 구현되어 있던 `Quiz` 데이터 클래스 파일을 `game` 디렉토리에서 `data_classes` 디렉토리로 이동함
 그러나 단순 파일 이동으론 vscode 상에서 완벽하게 경로 처리를 해주지 못해 다음과 같은 문제가 발생함
 
@@ -124,6 +128,8 @@ user_input : 1, <class 'int'>
 # vscode로 자동 전환된 임포팅
 from ..data_classes.Quiz import Quiz
 ```
+
+- 실행 결과 다음과 같은 충돌이 발생함
 
 ```bash
 $ python main.py
