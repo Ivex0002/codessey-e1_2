@@ -149,7 +149,6 @@ def run_quiz_session(quizzes: List[Quiz]):
 # 자연수 응답이 기대될때 잘못된 응답이 올 경우 메시지를 출력
 def check_int_user_input(max_number: int, min_number: int = 1):
     while True:
-        # x 입력시 뒤로가기 기능?
         user_input = input("선택: ").strip()
 
         if not user_input.isdigit():
