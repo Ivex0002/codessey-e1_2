@@ -92,39 +92,53 @@ class QuizGame:
             print("취소되었습니다")
 
     def run(self):
-        while True:
-            print("\n" + "=" * 23)
-            print("   🎯 퀴즈 게임 메뉴")
-            print("=" * 23)
+        try:
+            while True:
+                print("\n" + "=" * 23)
+                print("   🎯 퀴즈 게임 메뉴")
+                print("=" * 23)
 
-            menu = [
-                "퀴즈 시작",
-                "최고 점수 확인",
-                "퀴즈 추가",
-                "현재 퀴즈 목록 보기",
-                "퀴즈 삭제하기",
-                "종료",
-            ]
+                menu = [
+                    "퀴즈 시작",
+                    "최고 점수 확인",
+                    "퀴즈 추가",
+                    "현재 퀴즈 목록 보기",
+                    "퀴즈 삭제하기",
+                    "종료",
+                ]
 
-            user_input = choice(menu)
-            # print(f"user_input : {user_input}, {type(user_input)}")
+                user_input = choice(menu)
+                # print(f"user_input : {user_input}, {type(user_input)}")
 
-            match user_input:
-                case 1:
-                    self.start_quiz()
-                case 2:
-                    print(f"\n현재 최고 점수: {self.best_score}점")
-                case 3:
-                    self.add_quiz()
-                case 4:
-                    self.check_quizzes()
-                case 5:
-                    print("\n!!!퀴즈 삭제 메뉴입니다!!!\n")
-                    self.check_quizzes()
-                    self.del_quiz()
-                case 6:
-                    print("게임을 종료합니다.")
-                    self.save_data()
-                    break
-                case _:
-                    print(f"잘못된 입력입니다. 1~{len(menu)} 사이의 숫자를 입력하세요.")
+                match user_input:
+                    case 1:
+                        self.start_quiz()
+                    case 2:
+                        print(f"\n현재 최고 점수: {self.best_score}점")
+                    case 3:
+                        self.add_quiz()
+                    case 4:
+                        self.check_quizzes()
+                    case 5:
+                        print("\n!!!퀴즈 삭제 메뉴입니다!!!\n")
+                        self.check_quizzes()
+                        self.del_quiz()
+                    case 6:
+                        print("게임을 종료합니다.")
+                        self.save_data()
+                        break
+                    case _:
+                        print(
+                            f"잘못된 입력입니다. 1~{len(menu)} 사이의 숫자를 입력하세요."
+                        )
+        except (KeyboardInterrupt, EOFError):
+            print("\n\n프로그램 종료 요청이 감지되었습니다.")
+            print("데이터를 저장하고 종료합니다.")
+
+            try:
+                self.save_data()
+                print("데이터 저장이 완료되었습니다.")
+            except OSError as e:
+                print(f"데이터 저장에 실패했습니다: {e}")
+
+            print("프로그램을 종료합니다.")
