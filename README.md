@@ -5,7 +5,7 @@
 - [프로젝트 개요](README_documentation/project_overview.md) v
 - [퀴즈 주제 선정 이유](README_documentation/reasons_for_topic.md) v
 - [실행 방법](README_documentation/how_to_run.md) v
-- [기능 목록](README_documentation/feature_list.md) i
+- [기능 목록](README_documentation/feature_list.md) v
 - [파일 구조](README_documentation/file_structure.md) v
 - [데이터 파일 설명](README_documentation/data_file_specification.md) v
 
