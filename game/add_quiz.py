@@ -16,7 +16,7 @@ def add_quiz(quizzes: List[Quiz]):
 
         match user_input:
             case 1:
-                new_quiz = user_input_quiz()
+                new_quiz = user_input_quiz(True)
                 quizzes.append(new_quiz)
                 print("\n--- 새로운 퀴즈가 등록 되었습니다 ---")
                 last_idx = len(quizzes) - 1
@@ -31,8 +31,9 @@ def add_quiz(quizzes: List[Quiz]):
                 break
 
 
-def user_input_quiz():
-    print("\n--- 새로운 퀴즈 등록 ---")
+def user_input_quiz(is_new: bool):
+    msg = "\n--- 새로운 퀴즈 등록 ---" if is_new else "\n---수정 항목을 입력해주세요---"
+    print(msg)
     keys = [field.name for field in fields(Quiz)]
 
     new_quiz_data = {}
@@ -73,7 +74,7 @@ def prompt_msg(key: str) -> str:
 
 
 def ensure_user_input_new_quiz(new_quiz_data: dict, required_fields: list[str]) -> None:
-    missing_fields = required_fields - new_quiz_data.keys()
+    missing_fields = set(required_fields) - new_quiz_data.keys()
     if missing_fields:
         raise ValueError(f"누락된 필드: {missing_fields}")
     return

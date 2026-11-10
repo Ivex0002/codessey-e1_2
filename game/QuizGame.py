@@ -4,12 +4,13 @@ from typing import List
 from data_classes.Quiz import Quiz
 from .quizzes import quizzes
 from .run_quiz_session import run_quiz_session
-from .add_quiz import add_quiz
+from .add_quiz import add_quiz, user_input_quiz
 from .check_quizzes import check_quizzes
 from .check_history import check_history
 from util.choice import choice
 from util.check_a_quiz import check_a_quiz
 from util.check_int_user_input import check_int_user_input
+from util.yes_or_no import yes_or_no
 from data_classes.QuizSessionData import QuizSessionData
 
 
@@ -78,7 +79,7 @@ class QuizGame:
         return
 
     def show_record(self):
-        menu = ["현재 등록된 퀴즈 보기", "기록 보기", "뒤로가기"]
+        menu = ["현재 등록된 퀴즈 보기", "기록 보기", "퀴즈 수정하기", "뒤로가기"]
         while True:
             print("===퀴즈/기록 보기 메뉴입니다===")
             user_input = choice(menu)
@@ -89,6 +90,30 @@ class QuizGame:
                 case 2:
                     self.check_history()
                 case 3:
+                    self.check_quizzes()
+                    print("수정할 퀴즈 번호를 선택해주세요\n 취소 : 0번")
+                    user_input = check_int_user_input(len(self.quizzes), 0)
+
+                    if user_input == 0:
+                        print("퀴즈 수정 메뉴를 종료합니다")
+                        continue
+
+                    idx = user_input - 1
+
+                    print(f"{user_input}번 문제를 선택했습니다")
+                    check_a_quiz(self.quizzes[idx])
+                    edited_quiz = user_input_quiz(False)
+                    print("변경된 퀴즈는 다음과 같습니다")
+                    check_a_quiz(edited_quiz)
+                    is_save = yes_or_no("저장하시겠습니까?")
+                    if is_save:
+                        self.quizzes[idx] = edited_quiz
+                        self.save_data()
+                        print("저장되었습니다")
+                    else:
+                        print("취소되었습니다")
+
+                case 4:
                     print("퀴즈/기록 보기를 종료합니다")
                     break
 
@@ -105,7 +130,7 @@ class QuizGame:
         print("삭제할 문제가 맞는지 다시 한번 확인해주세요")
         print(f"\n{del_user_input}번 문제 : ", end="")
         check_a_quiz(self.quizzes[del_idx])
-        del_tf = input("\n삭제하시겠습니까? y/n\n입력 :").strip().lower() == "y"
+        del_tf = yes_or_no("삭제하시겠습니까?")
         if del_tf:
             del self.quizzes[del_idx]
             self.save_data()
