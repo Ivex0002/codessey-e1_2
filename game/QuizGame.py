@@ -55,6 +55,9 @@ class QuizGame:
     def start_quiz(self):
         quiz_session_data = run_quiz_session(self.quizzes)
 
+        if quiz_session_data is None:
+            return
+
         if quiz_session_data.score > self.best_score:
             print("최고 점수 경신!")
             self.best_score = quiz_session_data.score
