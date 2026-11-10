@@ -12,7 +12,7 @@ PS C:\Users\User\Documents\e1_2> python main.py
 1. 퀴즈 시작
 2. 최고 점수 확인
 3. 퀴즈 추가
-4. 현재 퀴즈 목록 보기
+4. 퀴즈/기록 보기
 5. 퀴즈 삭제하기
 6. 종료
 선택: 
@@ -31,7 +31,7 @@ PS C:\Users\User\Documents\e1_2> python main.py
 1. 퀴즈 시작
 2. 최고 점수 확인
 3. 퀴즈 추가
-4. 현재 퀴즈 목록 보기
+4. 퀴즈/기록 보기
 5. 퀴즈 삭제하기
 6. 종료
 선택: 1
@@ -42,10 +42,11 @@ PS C:\Users\User\Documents\e1_2> python main.py
 1. 순서대로 풀기
 2. 랜덤 순서 풀기
 3. 문제 수 선택
+4. 뒤로가기
 ```
 퀴즈 시작 선택시 나오는 화면입니다.
 
-기본 과제인 순서대로 풀기, 보너스 과제인 랜덤 순서 풀기와 문제 수 선택 메뉴가 있습니다.
+기본 과제인 순서대로 풀기, 보너스 과제인 랜덤 순서 풀기와 문제 수 선택, 뒤로가기 메뉴가 있습니다.
 
 문제 수 선택의 경우 보너스 과제 설명에서 아무런 제약이 없었으나, ux적인 측면에서 유저의 선택을 저장해 놓았다가 풀기 직전에 splice 하는것이 알맞다 생각해 다음과 같이 로직을 짰습니다
 ```
@@ -87,6 +88,7 @@ def run_quiz_session(quizzes: List[Quiz]):
 1. 순서대로 풀기
 2. 랜덤 순서 풀기
 3. 문제 수 선택
+4. 뒤로가기
 선택: 3
 총 문제 개수 : 4
 현재 풀 문제 개수 : 4
@@ -102,6 +104,7 @@ def run_quiz_session(quizzes: List[Quiz]):
 1. 순서대로 풀기
 2. 랜덤 순서 풀기
 3. 문제 수 선택
+4. 뒤로가기
 선택: 3
 총 문제 개수 : 4
 현재 풀 문제 개수 : 1
@@ -121,6 +124,7 @@ def run_quiz_session(quizzes: List[Quiz]):
 1. 순서대로 풀기
 2. 랜덤 순서 풀기
 3. 문제 수 선택
+4. 뒤로가기
 선택: 1
 
 문제 1. 바위너구리와 유전학적으로 가장 가까운 동물은?
@@ -188,7 +192,7 @@ def __init__(self):
 1. 퀴즈 시작
 2. 최고 점수 확인
 3. 퀴즈 추가
-4. 현재 퀴즈 목록 보기
+4. 퀴즈/기록 보기
 5. 퀴즈 삭제하기
 6. 종료
 선택: 2
@@ -198,7 +202,81 @@ def __init__(self):
 - 실행 화면
 
 ### 3. 퀴즈 추가
-# todo 문자열 > 숫자 타입 변경 필요
+- 퀴즈를 추가하는 로직입니다
+```
+def user_input_quiz(is_new: bool):
+    msg = "\n--- 새로운 퀴즈 등록 ---" if is_new else "\n---수정 항목을 입력해주세요---"
+    print(msg)
+    keys = [field.name for field in fields(Quiz)]
+
+    new_quiz_data = {}
+
+    for key in keys:
+
+        msg = prompt_msg(key)
+
+        match key:
+            case "question" | "hint":
+                value = input(f"▶ {msg}: ").strip()
+            case "choices":
+                choices_row_data = input(f"▶ {msg}: ").strip()
+                value = [
+                    opt.strip() for opt in choices_row_data.split(",") if opt.strip()
+                ]
+            case "answer":
+                print(msg)
+                value = check_int_user_input(len(new_quiz_data["choices"]))
+
+        new_quiz_data[key] = value
+    print("-" * 30)
+
+    ensure_user_input_new_quiz(new_quiz_data, keys)
+
+    return Quiz(**new_quiz_data)
+```
+퀴즈 하나를 유저 입력으로 받는 파트의 경우 업데이트 항목에 재활용이 가능하므로 약간의 수정 후 재활용 했습니다
+
+호출시 단순하게 True/False 항목을 받아 문구만 다르게 출력해줍니다
+
+리턴값은 두 경우 모두 동일하게 유저에게 입력받은 `Quiz` 객체 1개 입니다
+
+```
+def add_quiz(quizzes: List[Quiz]):
+    while True:
+        print("퀴즈 등록 메뉴입니다")
+        add_quiz_menu = ["새로운 퀴즈 등록", "현재 퀴즈 목록 확인", "종료"]
+
+        user_input = choice(add_quiz_menu)
+
+        match user_input:
+            case 1:
+                new_quiz = user_input_quiz(True)
+                quizzes.append(new_quiz)
+                print("\n--- 새로운 퀴즈가 등록 되었습니다 ---")
+                last_idx = len(quizzes) - 1
+                added_quiz = quizzes[last_idx]
+                print(f"{last_idx+1}번 : ", end="")
+                check_a_quiz(added_quiz)
+                return
+            case 2:
+                check_quizzes(quizzes)
+            case 3:
+                print("퀴즈 등록을 종료합니다")
+                break
+```
+새로운 퀴즈를 등록하는 화면입니다
+
+위에서 언급한 `user_input_quiz`를 사용하여 퀴즈 하나를 입력받고, 인자로 등록된 `quizzes` 배열의 끝에 새로운 퀴즈를 붙여주는 역할입니다
+
+```
+def add_quiz(self):
+   add_quiz(self.quizzes)
+   self.save_data()
+   return
+```
+저장의 경우 `QuizGame` 객체에서 직접 실행합니다
+
+저장 로직인 `save_data` 를 분리된 함수에서 실행하려면 인스턴스를 직접 넘겨줘야 하는 점 때문에 계층을 분리했습니다
 
 ### 4. 현재 퀴즈 목록 보기
 - 퀴즈 1개 확인 함수
@@ -306,6 +384,8 @@ def check_quizzes(quizzes: List[Quiz]):
 
 y/n 으로 선택지를 전달했으나, 데이터 안전을 위해 실제로는 y나 Y 이외에는 전부 취소 처리하도록 구성했습니다
 
+이와 같이 예/아니오 선택 분기 로직의 경우 재사용 될 가능성이 높아 따로 분리하였습니다. 이 선택 분기 함수는 crud의 u 파트에 재활용됩니다
+
 해당 메서드의 경우 인스턴스의 데이터에 직접 접근해야 하는 점 때문에 QuizGame 클래스와 굳이 분리하지 않고 그대로 내부에 작성했습니다
 
 만약 이를 분리한다면 인자 단계에서부터 QuizGame 클래스의 인스턴스를 직접 삽입하거나, 해당 인스턴스를 식별 가능하게 만드는 id를 따로 구성해야 했으므로 내부에 직접 구현할 때 보다 개발 비용이 커진다고 판단했습니다.
@@ -337,7 +417,7 @@ y/n 으로 선택지를 전달했으나, 데이터 안전을 위해 실제로는
 1. 퀴즈 시작
 2. 최고 점수 확인
 3. 퀴즈 추가
-4. 현재 퀴즈 목록 보기
+4. 퀴즈/기록 보기
 5. 퀴즈 삭제하기
 6. 종료
 선택: 4
