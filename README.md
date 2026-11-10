@@ -10,3 +10,4 @@
 - [데이터 파일 설명](README_documentation/data_file_specification.md) v
 
 - [트러블 슈팅](README_documentation/trouble_shooting.md) v
+- [브랜치 연습](README_documentation/branch_practice.md) v
