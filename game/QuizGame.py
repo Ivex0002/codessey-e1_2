@@ -6,6 +6,7 @@ from .quizzes import quizzes
 from .run_quiz_session import run_quiz_session
 from .add_quiz import add_quiz
 from .check_quizzes import check_quizzes
+from .check_history import check_history
 from util.choice import choice
 from util.check_a_quiz import check_a_quiz
 from util.check_int_user_input import check_int_user_input
@@ -69,6 +70,25 @@ class QuizGame:
         check_quizzes(self.quizzes)
         return
 
+    def check_history(self):
+        check_history(self.history)
+        return
+
+    def show_record(self):
+        menu = ["현재 등록된 퀴즈 보기", "기록 보기", "뒤로가기"]
+        while True:
+            print("===퀴즈/기록 보기 메뉴입니다===")
+            user_input = choice(menu)
+
+            match user_input:
+                case 1:
+                    self.check_quizzes()
+                case 2:
+                    self.check_history()
+                case 3:
+                    print("퀴즈/기록 보기를 종료합니다")
+                    break
+
     def del_quiz(self):
         print("\n삭제할 문제의 번호를 선택해주세요(취소 : 0)")
         del_user_input = check_int_user_input(len(self.quizzes), 0)
@@ -92,24 +112,24 @@ class QuizGame:
             print("취소되었습니다")
 
     def run(self):
+        menu = [
+            "퀴즈 시작",
+            "최고 점수 확인",
+            "퀴즈 추가",
+            "퀴즈/기록 보기",
+            "퀴즈 삭제하기",
+            "종료",
+        ]
         try:
             while True:
                 print("\n" + "=" * 23)
                 print("   🎯 퀴즈 게임 메뉴")
                 print("=" * 23)
 
-                menu = [
-                    "퀴즈 시작",
-                    "최고 점수 확인",
-                    "퀴즈 추가",
-                    "현재 퀴즈 목록 보기",
-                    "퀴즈 삭제하기",
-                    "종료",
-                ]
-
                 user_input = choice(menu)
                 # print(f"user_input : {user_input}, {type(user_input)}")
 
+                # user_input의 예외 처리는 choice, check_int_user_input 에서 수행합니다.
                 match user_input:
                     case 1:
                         self.start_quiz()
@@ -118,7 +138,7 @@ class QuizGame:
                     case 3:
                         self.add_quiz()
                     case 4:
-                        self.check_quizzes()
+                        self.show_record()
                     case 5:
                         print("\n!!!퀴즈 삭제 메뉴입니다!!!\n")
                         self.check_quizzes()
@@ -127,10 +147,7 @@ class QuizGame:
                         print("게임을 종료합니다.")
                         self.save_data()
                         break
-                    case _:
-                        print(
-                            f"잘못된 입력입니다. 1~{len(menu)} 사이의 숫자를 입력하세요."
-                        )
+
         except (KeyboardInterrupt, EOFError):
             print("\n\n프로그램 종료 요청이 감지되었습니다.")
             print("데이터를 저장하고 종료합니다.")
