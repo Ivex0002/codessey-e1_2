@@ -14,11 +14,11 @@
 
 ### 보너스 과제 링크 묶음(작업중)
 1. [랜덤 출제](https://github.com/Ivex0002/codessey-e1_2/blob/72c109daf3d271b80b997300afd2b321bd01f5af/game/run_quiz_session.py#L36-L38)
-2. [문제 수 선택]()
-3. [힌트 기능]()
-4. [퀴즈 삭제 기능]()
-5. [점수 기록 히스토리]()
+2. [문제 수 선택](https://github.com/Ivex0002/codessey-e1_2/blob/cb50cf6ab7b7b95bd8d898554e8ba134c3e873c0/game/run_quiz_session.py#L28-L34)
+3. [힌트 기능](https://github.com/Ivex0002/codessey-e1_2/blob/cb50cf6ab7b7b95bd8d898554e8ba134c3e873c0/game/run_quiz_session.py#L50-L59)
+4. [퀴즈 삭제 기능](https://github.com/Ivex0002/codessey-e1_2/blob/cb50cf6ab7b7b95bd8d898554e8ba134c3e873c0/game/QuizGame.py#L120)
+5. [점수 기록 히스토리 : 저장](https://github.com/Ivex0002/codessey-e1_2/blob/cb50cf6ab7b7b95bd8d898554e8ba134c3e873c0/game/QuizGame.py#L41)
 
 ### 추가기능
-1. [문제 수정]()
-2. [문제 풀이 기록 보기]()
+1. [퀴즈 수정](https://github.com/Ivex0002/codessey-e1_2/blob/cb50cf6ab7b7b95bd8d898554e8ba134c3e873c0/game/QuizGame.py#L92)
+2. [점수 기록 히스토리 : 조회](https://github.com/Ivex0002/codessey-e1_2/blob/cb50cf6ab7b7b95bd8d898554e8ba134c3e873c0/game/QuizGame.py#L81)
