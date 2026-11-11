@@ -13,7 +13,7 @@
 - [브랜치 연습](README_documentation/branch_practice.md) v
 
 ### 보너스 과제 링크 묶음(작업중)
-1. [랜덤 출제]()
+1. [랜덤 출제](https://github.com/Ivex0002/codessey-e1_2/blob/72c109daf3d271b80b997300afd2b321bd01f5af/game/run_quiz_session.py#L36-L38)
 2. [문제 수 선택]()
 3. [힌트 기능]()
 4. [퀴즈 삭제 기능]()
